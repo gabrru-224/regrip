@@ -12,7 +12,7 @@ This is a backend for a Task Management System built with Node.js, Express.js, a
 
 ## Hosted Backend URL
 
-The backend is not deployed yet. You need to deploy it to a hosting platform like Render, Railway, AWS, or Heroku.
+The backend is designed to be easily deployed on [Render](https://render.com/).
 
 ## API Documentation Link
 
@@ -42,6 +42,21 @@ Locally, it is available at [http://localhost:3000/api-docs](http://localhost:30
     ```bash
     npm start
     ```
+
+## Deployment to Render
+
+1.  Push your code to a GitHub repository.
+2.  Log in to Render and click **New +** -> **Web Service**.
+3.  Connect your GitHub repository.
+4.  Use the following settings:
+    *   **Runtime**: Node
+    *   **Build Command**: `npm install`
+    *   **Start Command**: `npm start`
+5.  Scroll down to **Environment Variables** and add the keys from your `.env` file:
+    *   `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` (From Neon DB)
+    *   `JWT_SECRET`
+    *   `EMAIL_USER`, `EMAIL_PASS`
+    *   `SERVER_URL`: Set this to your Render app URL (e.g., `https://your-app-name.onrender.com`)
 
 ## Design Decisions & Architecture
 
