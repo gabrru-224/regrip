@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.SERVER_URL || 'http://localhost:3000',
+        url: 'http://localhost:3000',
       },
     ],
     components: {
