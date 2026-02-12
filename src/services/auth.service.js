@@ -2,6 +2,11 @@ const db = require('../config/db');
 const User = db.User;
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const dns = require('dns');
+
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -11,7 +16,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  family: 4 
+  family: 4,
+  localAddress: '0.0.0.0' 
 });
 
 exports.generateOtp = async (email) => {
@@ -28,7 +34,7 @@ exports.generateOtp = async (email) => {
   }
 
   const mailOptions = {
-    from: 'your-email@gmail.com',
+    from: process.env.EMAIL_USER,
     to: email,
     subject: 'Your OTP for Task Management System',
     text: `Your OTP is: ${otp}`
