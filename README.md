@@ -12,11 +12,11 @@ This is a backend for a Task Management System built with Node.js, Express.js, a
 
 ## Hosted Backend URL
 
-The backend is designed to be easily deployed on [Render](https://render.com/).
+The backend is deployed on Render: [https://regrip.onrender.com](https://regrip.onrender.com)
 
 ## API Documentation Link
 
-The API documentation is available at `/api-docs` on the hosted backend URL.
+The API documentation is available here: https://regrip.onrender.com/api-docs/
 Locally, it is available at [http://localhost:3000/api-docs](http://localhost:3000/api-docs).
 
 ## Steps to run the project locally
