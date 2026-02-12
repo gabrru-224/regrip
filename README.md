@@ -28,9 +28,9 @@ Locally, it is available at [http://localhost:3000/api-docs](http://localhost:30
     ```
 3.  Create a `.env` file in the root directory and add the following environment variables:
     ```
-    DB_HOST=ep-late-water-aie2tdbi-pooler.c-4.us-east-1.aws.neon.tech
-    DB_USER=neondb_owner
-    DB_PASSWORD=npg_jAwfIl7P1HQO
+    DB_HOST=your_neon_host
+    DB_USER=your_neon_user
+    DB_PASSWORD=your_neon_password
     DB_NAME=neondb
     PORT=3000
     JWT_SECRET=a-very-secret-key
