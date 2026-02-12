@@ -10,6 +10,7 @@ const { logActivity } = require('./src/middlewares/activityLogger');
 const swaggerDocs = require('./src/config/swagger');
 
 const app = express();
+app.set('trust proxy', 1);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
