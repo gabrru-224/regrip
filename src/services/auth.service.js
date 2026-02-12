@@ -2,23 +2,24 @@ const db = require('../config/db');
 const User = db.User;
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-const dns = require('dns');
 
-if (dns.setDefaultResultOrder) {
-  dns.setDefaultResultOrder('ipv4first');
-}
+let transporter;
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-});
+const createTestTransporter = async () => {
+  const testAccount = await nodemailer.createTestAccount();
+  transporter = nodemailer.createTransport({
+    host: testAccount.smtp.host,
+    port: testAccount.smtp.port,
+    secure: testAccount.smtp.secure,
+    auth: { user: testAccount.user, pass: testAccount.pass },
+  });
+};
 
 exports.generateOtp = async (email) => {
+  if (!transporter) {
+    await createTestTransporter();
+  }
+
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
 
@@ -31,14 +32,14 @@ exports.generateOtp = async (email) => {
     await user.save();
   }
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
+  const info = await transporter.sendMail({
+    from: '"Task App" <no-reply@example.com>',
     to: email,
     subject: 'Your OTP for Task Management System',
-    text: `Your OTP is: ${otp}`
-  };
+    text: `Your OTP is: ${otp}`,
+  });
 
-  await transporter.sendMail(mailOptions);
+  return nodemailer.getTestMessageUrl(info);
 };
 
 exports.login = async (email, otp) => {

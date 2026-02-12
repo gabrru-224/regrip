@@ -6,8 +6,8 @@ exports.sendOtp = async (req, res) => {
     if (!email) {
       return res.status(400).json({ message: 'Email is required' });
     }
-    await authService.generateOtp(email);
-    res.status(200).json({ message: 'OTP sent successfully' });
+    const previewUrl = await authService.generateOtp(email);
+    res.status(200).json({ message: 'OTP sent successfully', previewUrl });
   } catch (error) {
     console.error('Send OTP Error:', error);
     res.status(500).json({ message: 'Error sending OTP', error: error.message });

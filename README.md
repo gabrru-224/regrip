@@ -4,7 +4,7 @@ This is a backend for a Task Management System built with Node.js, Express.js, a
 
 ## Features
 
-- Email-based OTP Authentication with JWT
+- Email-based OTP Authentication (Uses Ethereal Email for demo purposes)
 - CRUD operations for Tasks
 - Rate Limiting
 - Activity Logging
@@ -34,10 +34,8 @@ Locally, it is available at [http://localhost:3000/api-docs](http://localhost:30
     DB_NAME=neondb
     PORT=3000
     JWT_SECRET=a-very-secret-key
-    EMAIL_USER=your-email@gmail.com
-    EMAIL_PASS=your-app-password
     ```
-4.  Configure your email transporter in `src/services/auth.service.js`.
+4.  No email configuration is required (Auto-generated test account).
 5.  Start the server:
     ```bash
     npm start
@@ -55,7 +53,6 @@ Locally, it is available at [http://localhost:3000/api-docs](http://localhost:30
 5.  Scroll down to **Environment Variables** and add the keys from your `.env` file:
     *   `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` (From Neon DB)
     *   `JWT_SECRET`
-    *   `EMAIL_USER`, `EMAIL_PASS`
     *   `SERVER_URL`: Set this to your Render app URL (e.g., `https://your-app-name.onrender.com`)
 
 ## Design Decisions & Architecture
@@ -72,7 +69,7 @@ The project follows a standard layered architecture with a clear separation of c
 ### Assumptions
 
 -   A PostgreSQL database (Neon DB) is used.
--   The email service is not configured. You need to configure it with your own credentials in `src/services/auth.service.js`. I have used `nodemailer` for this, and you can use any email service provider like Gmail, SendGrid, etc.
+-   **Email Delivery**: For this demo/portfolio deployment, real emails are not sent to avoid spam blocking and domain verification issues. Instead, **Ethereal Email** is used. When you request an OTP, the API response will contain a `previewUrl`. Click that link to view the "fake" email and get your OTP code.
 -   The JWT secret is a simple string. For production, it is recommended to use a more complex and long secret, and store it securely.
 -   The rate limiting is basic. For production, you might want to use a more robust solution with a persistent store like Redis.
 -   The activity logging is also basic. For production, you might want to use a dedicated logging service or a more structured logging format.

@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://regrip.onrender.com',
+        url: process.env.SERVER_URL || 'http://localhost:3000',
       },
     ],
     components: {
