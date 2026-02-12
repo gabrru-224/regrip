@@ -4,7 +4,7 @@ This is a backend for a Task Management System built with Node.js, Express.js, a
 
 ## Features
 
-- Email-based OTP Authentication (Uses Ethereal Email for demo purposes)
+- Email-based OTP Authentication (OTP returned in response for demo purposes)
 - CRUD operations for Tasks
 - Rate Limiting
 - Activity Logging
@@ -35,7 +35,7 @@ Locally, it is available at [http://localhost:3000/api-docs](http://localhost:30
     PORT=3000
     JWT_SECRET=a-very-secret-key
     ```
-4.  No email configuration is required (Auto-generated test account).
+4.  No email configuration is required.
 5.  Start the server:
     ```bash
     npm start
@@ -69,7 +69,7 @@ The project follows a standard layered architecture with a clear separation of c
 ### Assumptions
 
 -   A PostgreSQL database (Neon DB) is used.
--   **Email Delivery**: For this demo/portfolio deployment, real emails are not sent to avoid spam blocking and domain verification issues. Instead, **Ethereal Email** is used. When you request an OTP, the API response will contain a `previewUrl`. Click that link to view the "fake" email and get your OTP code.
+-   **Email Delivery**: Due to cloud platform restrictions on SMTP ports (Render Free Tier), real email delivery is disabled for this demo. Instead, the **OTP is returned directly in the API response** when you call the `/send-otp` endpoint. This allows full testing of the authentication flow without external dependencies.
 -   The JWT secret is a simple string. For production, it is recommended to use a more complex and long secret, and store it securely.
 -   The rate limiting is basic. For production, you might want to use a more robust solution with a persistent store like Redis.
 -   The activity logging is also basic. For production, you might want to use a dedicated logging service or a more structured logging format.

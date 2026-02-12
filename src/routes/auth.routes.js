@@ -37,9 +37,9 @@ const authController = require('../controllers/auth.controller');
  *               properties:
  *                 message:
  *                   type: string
- *                 previewUrl:
+ *                 otp:
  *                   type: string
- *                   description: Click this link to view the OTP email (Demo Mode)
+ *                   description: The generated OTP (Demo Mode - returned directly for testing)
  */
 router.post('/send-otp', authController.sendOtp);
 
